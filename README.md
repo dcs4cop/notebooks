@@ -1,2 +1,2 @@
-[![Build Status](https://ci.appveyor.com/api/projects/status/vjwau20nejcx1yib?svg=true)](https://ci.appveyor.com/project/dcs4cop/notebooks)
+[![Build Status](https://ci.appveyor.com/api/projects/status/fqn11mqrx9mlj6j8?svg=true)](https://ci.appveyor.com/project/bcdev/notebooks)
 # notebooks
