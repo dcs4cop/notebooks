@@ -33,6 +33,7 @@ build_script:
   - export MAMBA_ROOT_PREFIX=~/micromamba
   - export MAMBA_EXE=$(pwd)/micromamba
   - . $MAMBA_ROOT_PREFIX/etc/profile.d/mamba.sh
+  - git submodule update --init --recursive
   - micromamba create -y -f xcube/environment.yml -c conda-forge
   - micromamba activate xcube
   - python xcube/setup.py install
