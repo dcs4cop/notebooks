@@ -34,14 +34,15 @@ build_script:
   - export MAMBA_EXE=$(pwd)/micromamba
   - . $MAMBA_ROOT_PREFIX/etc/profile.d/mamba.sh
   - git submodule update --init --recursive
-  - micromamba create -y -f xcube/environment.yml -c conda-forge
+  - cd xcube
+  - micromamba create -y -f environment.yml -c conda-forge
   - micromamba activate xcube
-  - python xcube/setup.py install
+  - python setup.py install
 
   - micromamba install --channel conda-forge xcube-cci
   - micromamba install -c conda-forge xcube_sh
   - micromamba install --channel conda-forge xcube-cds
-
+  - cd ..
   - for nb in */examples/notebooks/*.ipynb;
       JUPYTER_NOTEBOOK = nb
 
