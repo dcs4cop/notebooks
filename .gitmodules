@@ -1,0 +1,12 @@
+[submodule "xcube"]
+	path = xcube
+	url = https://github.com/dcs4cop/xcube.git
+[submodule "xcube-cds"]
+	path = xcube-cds
+	url = https://github.com/dcs4cop/xcube-cds.git
+[submodule "xcube-cci"]
+	path = xcube-cci
+	url = https://github.com/dcs4cop/xcube-cci.git
+[submodule "xcube-sh"]
+	path = xcube-sh
+	url = https://github.com/dcs4cop/xcube-sh.git
