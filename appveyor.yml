@@ -40,7 +40,7 @@ build_script:
   - python setup.py install
 
   - micromamba install --channel conda-forge xcube-cci
-  - micromamba install -c conda-forge xcube_sh
+  - micromamba install -c conda-forge xcube-sh
   - micromamba install --channel conda-forge xcube-cds
   - cd ..
   - for nb in */examples/notebooks/*.ipynb;
