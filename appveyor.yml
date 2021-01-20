@@ -58,7 +58,7 @@ build_script:
       filename="${filename%.*}";
       file="${directory}/${filename}.py";
       echo "Testing ${file}";
-      python $file || continue;
+      (cd $directory && ipython $file || continue);
     done
   - for nb in xcube/examples/notebooks/*/*.ipynb;
     do
@@ -69,5 +69,5 @@ build_script:
       filename="${filename%.*}";
       file="${directory}/${filename}.py";
       echo "Testing ${file}";
-      ipython $file || continue;
+      (cd $directory && ipython $file || continue);
     done
