@@ -9,6 +9,11 @@ configuration: Release
 platform:
   - x64
 
+environment:
+  matrix:
+    - JUPYTER_NOTEBOOK
+    - CONDA_ENVIRONMENT:
+
 for:
 -
   matrix:
@@ -43,10 +48,16 @@ build_script:
   - micromamba install -c conda-forge xcube-sh
   - micromamba install --channel conda-forge xcube-cds
   - cd ..
+  - micromamba install -c conda-forge jupyterlab
+
+  - mkdir jupyter_nbs
   - for nb in */examples/notebooks/*.ipynb;
     do
-      JUPYTER_NOTEBOOK = $nb;
+      jupyter nbconvert --to python  --ExecutePreprocessor.kernel_name=python3 $nb;
     done
-
-
-
+  - mv */examples/notebooks/*.py jupyter_nbs
+  - for nb in jupyter_nbs/*.py;
+    do
+      echo "Testing ${nb}";
+      python $nb;
+    done
