@@ -47,6 +47,7 @@ build_script:
   - micromamba install -c conda-forge jupyterlab
   - micromamba install -c conda-forge psycopg2
   - micromamba install -c conda-forge cartopy
+  - micromamba install -c conda-forge ipython
 
   - for nb in */examples/notebooks/*.ipynb;
     do
@@ -68,5 +69,5 @@ build_script:
       filename="${filename%.*}";
       file="${directory}/${filename}.py";
       echo "Testing ${file}";
-      python $file || continue;
+      ipython $file || continue;
     done
