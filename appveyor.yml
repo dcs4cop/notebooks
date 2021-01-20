@@ -57,7 +57,9 @@ build_script:
     do
       jupyter nbconvert --to python  --ExecutePreprocessor.kernel_name=python3 $nb;
     done
+  - mv */examples/notebooks/*.py jupyter_nbs
   - mv */examples/notebooks/*/*.py jupyter_nbs
+  - ls jupyter_nbs
   - for nb in jupyter_nbs/*.py;
     do
       echo "Testing ${nb}";
