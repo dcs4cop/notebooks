@@ -56,8 +56,8 @@ build_script:
       directory=$(dirname "${VAR}");
       filename=$(basename -- "$nb");
       filename="${filename%.*}";
-      file="${directory}/${filename}.py";
-      echo "Testing ${file}";
+      file="${filename}.py";
+      echo "Testing ${file} in directory ${directory}";
       (cd $directory && ipython $file || continue);
     done
   - for nb in xcube/examples/notebooks/*/*.ipynb;
@@ -67,7 +67,7 @@ build_script:
       directory=$(dirname "${VAR}");
       filename=$(basename -- "$nb");
       filename="${filename%.*}";
-      file="${directory}/${filename}.py";
-      echo "Testing ${file}";
+      file="${filename}.py";
+      echo "Testing ${file} in directory ${directory}";
       (cd $directory && ipython $file || continue);
     done
