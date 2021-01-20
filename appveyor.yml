@@ -45,6 +45,8 @@ build_script:
   - micromamba install --channel conda-forge xcube-cds
   - cd ..
   - micromamba install -c conda-forge jupyterlab
+  - micromamba install -c conda-forge psycopg2
+  - micromamba install -c conda-forge cartopy
 
   - mkdir jupyter_nbs
   - for nb in */examples/notebooks/*.ipynb;
