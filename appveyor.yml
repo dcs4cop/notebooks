@@ -48,20 +48,24 @@ build_script:
   - micromamba install -c conda-forge psycopg2
   - micromamba install -c conda-forge cartopy
 
-  - mkdir jupyter_nbs
   - for nb in */examples/notebooks/*.ipynb;
     do
       jupyter nbconvert --to python  --ExecutePreprocessor.kernel_name=python3 $nb;
+      directory=dirname $nb;
+      filename=$(basename -- "$nb");
+      filename="${filename%.*}";
+      file="${directory}/${filename}.py";
+      echo "Testing ${file}";
+      python $file || continue;
     done
   - for nb in xcube/examples/notebooks/*/*.ipynb;
     do
       jupyter nbconvert --to python  --ExecutePreprocessor.kernel_name=python3 $nb;
+      directory=dirname $nb;
+      filename=$(basename -- "$nb");
+      filename="${filename%.*}";
+      file="${directory}/${filename}.py";
+      echo "Testing ${file}";
+      python $file || continue;
     done
-  - mv */examples/notebooks/*.py jupyter_nbs
-  - mv */examples/notebooks/*/*.py jupyter_nbs
-  - ls jupyter_nbs
-  - for nb in jupyter_nbs/*.py;
-    do
-      echo "Testing ${nb}";
-      python $nb || continue;
-    done
+
