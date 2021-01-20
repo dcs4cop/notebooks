@@ -9,10 +9,6 @@ configuration: Release
 platform:
   - x64
 
-environment:
-  matrix:
-    - JUPYTER_NOTEBOOK
-    - CONDA_ENVIRONMENT:
 
 for:
 -
