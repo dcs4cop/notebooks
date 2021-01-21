@@ -61,7 +61,6 @@ build_script:
           if [[ -d $dir_with_nbs ]]; then
             for nb in ${dir_with_nbs}/*.ipynb;
               do
-                cd "$initial_wd";
                 jupyter nbconvert --to python  --ExecutePreprocessor.kernel_name=python3 $nb;
                 export VAR=$nb;
                 directory=$(dirname "${VAR}");
@@ -69,7 +68,7 @@ build_script:
                 filename="${filename%.*}";
                 file="${filename}.py";
                 echo "Testing ${file} in directory ${directory}";
-                cd "$directory" && ipython "$file" || list_of_failing_nbs+=( "$nb" ) && continue;
+                cd "$directory" && ipython "$file" || list_of_failing_nbs+=( "$nb" ) && cd "$initial_wd" && continue;
               done
           fi
         done
