@@ -10,3 +10,6 @@
 [submodule "xcube-sh"]
 	path = xcube-sh
 	url = https://github.com/dcs4cop/xcube-sh.git
+[submodule "xcube-geodb"]
+	path = xcube-geodb
+	url = https://github.com/dcs4cop/xcube-geodb.git

@@ -50,27 +50,20 @@ build_script:
   - micromamba install -c conda-forge ipython
   - micromamba install -c conda-forge cfgrib
 
-  - list_of_failing_nbs=()
-  - for nb in */examples/notebooks/*.ipynb;
-    do
-      jupyter nbconvert --to python  --ExecutePreprocessor.kernel_name=python3 $nb;
-      export VAR=$nb;
-      directory=$(dirname "${VAR}");
-      filename=$(basename -- "$nb");
-      filename="${filename%.*}";
-      file="${filename}.py";
-      echo "Testing ${file} in directory ${directory}";
-      (cd $directory && ipython $file || list_of_failing_nbs+=( "$nb" ) && continue);
-    done
-  - for nb in xcube/examples/notebooks/*/*.ipynb;
-    do
-      jupyter nbconvert --to python  --ExecutePreprocessor.kernel_name=python3 $nb;
-      export VAR=$nb;
-      directory=$(dirname "${VAR}");
-      filename=$(basename -- "$nb");
-      filename="${filename%.*}";
-      file="${filename}.py";
-      echo "Testing ${file} in directory ${directory}";
-      (cd $directory && ipython $file || list_of_failing_nbs+=( "$nb" ) && continue);
-    done
+  - export list_of_failing_nbs=()
+  - directories_with_nbs="*/examples/notebooks xcube/examples/notebooks/* */notebooks"
+  - for dir_with_nbs in $directories_with_nbs;
+        do
+          for nb in ${dir_with_nbs}/*.ipynb;
+            do
+              jupyter nbconvert --to python  --ExecutePreprocessor.kernel_name=python3 $nb;
+              export VAR=$nb;
+              directory=$(dirname "${VAR}");
+              filename=$(basename -- "$nb");
+              filename="${filename%.*}";
+              file="${filename}.py";
+              echo "Testing ${file} in directory ${directory}";
+              (cd $directory && ipython $file || export list_of_failing_nbs+=( "$nb" ) && continue);
+            done
+        done
   - echo "The failing notebooks are - ${list_of_failing_nbs[@]}"
