@@ -35,6 +35,7 @@ build_script:
   - export MAMBA_EXE=$(pwd)/micromamba
   - . $MAMBA_ROOT_PREFIX/etc/profile.d/mamba.sh
   - git submodule update --init --recursive
+  - git submodule update --recursive --remote
   - cd xcube
   - micromamba create -y -f environment.yml -c conda-forge
   - micromamba activate xcube
@@ -51,8 +52,9 @@ build_script:
   - micromamba install -c conda-forge ipython
   - micromamba install -c conda-forge cfgrib
 
-  - export list_of_failing_nbs=()
+  - list_of_failing_nbs=()
   - directories_with_nbs="*/examples/notebooks xcube/examples/notebooks/* */notebooks"
+  - initial_wd=$(pwd)
   - for dir_with_nbs in $directories_with_nbs;
         do
           if [[ -d $dir_with_nbs ]]; then
@@ -65,8 +67,8 @@ build_script:
                 filename="${filename%.*}";
                 file="${filename}.py";
                 echo "Testing ${file} in directory ${directory}";
-                (cd $directory && ipython $file || export list_of_failing_nbs+=( "$nb" ) && continue);
+                cd "$directory" && ipython "$file" || list_of_failing_nbs+=( "$nb" ) && cd "$initial_wd" && continue;
               done
           fi
         done
-  - echo "The failing notebooks are ${list_of_failing_nbs}"
+  - echo "The failing notebooks are ${list_of_failing_nbs[@]}"
