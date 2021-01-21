@@ -48,10 +48,13 @@ build_script:
   - micromamba install -c conda-forge psycopg2
   - micromamba install -c conda-forge cartopy
   - micromamba install -c conda-forge ipython
+  - micromamba install -c conda-forge cfgrib
 
+  - list_of_failing_nbs=()
   - for nb in */examples/notebooks/*.ipynb;
     do
       jupyter nbconvert --to python  --ExecutePreprocessor.kernel_name=python3 $nb;
+      list_of_failing_nbs+=( "$nb" );
       export VAR=$nb;
       directory=$(dirname "${VAR}");
       filename=$(basename -- "$nb");
@@ -59,10 +62,12 @@ build_script:
       file="${filename}.py";
       echo "Testing ${file} in directory ${directory}";
       (cd $directory && ipython $file || continue);
+      unset list_of_failing_nbs[-1];
     done
   - for nb in xcube/examples/notebooks/*/*.ipynb;
     do
       jupyter nbconvert --to python  --ExecutePreprocessor.kernel_name=python3 $nb;
+      list_of_failing_nbs+=( "$nb" );
       export VAR=$nb;
       directory=$(dirname "${VAR}");
       filename=$(basename -- "$nb");
@@ -70,4 +75,6 @@ build_script:
       file="${filename}.py";
       echo "Testing ${file} in directory ${directory}";
       (cd $directory && ipython $file || continue);
+      unset list_of_failing_nbs[-1];
     done
+  - echo "The failing notebooks are - ${list_of_failing_nbs[@]}"
