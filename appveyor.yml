@@ -54,27 +54,23 @@ build_script:
   - for nb in */examples/notebooks/*.ipynb;
     do
       jupyter nbconvert --to python  --ExecutePreprocessor.kernel_name=python3 $nb;
-      list_of_failing_nbs+=( "$nb" );
       export VAR=$nb;
       directory=$(dirname "${VAR}");
       filename=$(basename -- "$nb");
       filename="${filename%.*}";
       file="${filename}.py";
       echo "Testing ${file} in directory ${directory}";
-      (cd $directory && ipython $file || continue);
-      unset list_of_failing_nbs[-1];
+      (cd $directory && ipython $file || list_of_failing_nbs+=( "$nb" ) && continue);
     done
   - for nb in xcube/examples/notebooks/*/*.ipynb;
     do
       jupyter nbconvert --to python  --ExecutePreprocessor.kernel_name=python3 $nb;
-      list_of_failing_nbs+=( "$nb" );
       export VAR=$nb;
       directory=$(dirname "${VAR}");
       filename=$(basename -- "$nb");
       filename="${filename%.*}";
       file="${filename}.py";
       echo "Testing ${file} in directory ${directory}";
-      (cd $directory && ipython $file || continue);
-      unset list_of_failing_nbs[-1];
+      (cd $directory && ipython $file || list_of_failing_nbs+=( "$nb" ) && continue);
     done
   - echo "The failing notebooks are - ${list_of_failing_nbs[@]}"
