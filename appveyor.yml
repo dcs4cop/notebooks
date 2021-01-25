@@ -53,9 +53,8 @@ build_script:
   - micromamba install -c conda-forge cfgrib
 
   - list_of_failing_nbs=()
-#  - directories_with_nbs="*/examples/notebooks xcube/examples/notebooks/datastores \
-#                          xcube/examples/notebooks/sns_chl_analysis */notebooks"
-  - directories_with_nbs="xcube/examples/notebooks/datastores"
+  - directories_with_nbs="*/examples/notebooks xcube/examples/notebooks/datastores \
+                          xcube/examples/notebooks/sns_chl_analysis */notebooks"
   - initial_wd=$(pwd)
   - for dir_with_nbs in $directories_with_nbs;
         do
