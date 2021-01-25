@@ -74,7 +74,7 @@ build_script:
           fi
         done
   - if [[ ${#list_of_failing_nbs[@]} -eq 0 ]]; then
-      echo "Hurray! No jupyter notebooks are failing!"
+      echo "Hurray! No jupyter notebooks are failing!";
     else
       echo "The failing notebooks are ${list_of_failing_nbs[@]}, exiting with error.";
       exit 1;
