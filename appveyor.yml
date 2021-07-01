@@ -50,11 +50,6 @@ build_script:
   - python setup.py install
 
 
-#  - micromamba install --channel conda-forge xcube-cci
-#  - micromamba install -c conda-forge xcube-sh
-#  - micromamba install --channel conda-forge xcube-cds
-#  - micromamba install -c conda-forge xcube_geodb
-#  - cd ..
   - micromamba install -c conda-forge jupyterlab
   - micromamba install -c conda-forge psycopg2
   - micromamba install -c conda-forge cartopy
@@ -63,7 +58,7 @@ build_script:
 
   - list_of_failing_nbs=()
   - directories_with_nbs="*/examples/notebooks xcube/examples/notebooks/datastores \
-                          xcube/examples/notebooks/sns_chl_analysis */notebooks"
+                          xcube/examples/notebooks/* */notebooks"
   - initial_wd=$(pwd)
   - for dir_with_nbs in $directories_with_nbs;
         do
