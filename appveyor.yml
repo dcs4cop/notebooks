@@ -48,6 +48,7 @@ build_script:
   - python setup.py develop
   - cd ../xcube-geodb
   - python setup.py develop
+  - cd ..
 
 
   - micromamba install -c conda-forge jupyterlab
