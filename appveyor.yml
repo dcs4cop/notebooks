@@ -40,12 +40,21 @@ build_script:
   - micromamba create -y -f environment.yml -c conda-forge
   - micromamba activate xcube
   - python setup.py install
+  - cd ../xcube-cci
+  - python setup.py install
+  - cd ../xcube-cds
+  - python setup.py install
+  - cd ../xcube-sh
+  - python setup.py install
+  - cd ../xcube-geodb
+  - python setup.py install
 
-  - micromamba install --channel conda-forge xcube-cci
-  - micromamba install -c conda-forge xcube-sh
-  - micromamba install --channel conda-forge xcube-cds
-  - micromamba install -c conda-forge xcube_geodb
-  - cd ..
+
+#  - micromamba install --channel conda-forge xcube-cci
+#  - micromamba install -c conda-forge xcube-sh
+#  - micromamba install --channel conda-forge xcube-cds
+#  - micromamba install -c conda-forge xcube_geodb
+#  - cd ..
   - micromamba install -c conda-forge jupyterlab
   - micromamba install -c conda-forge psycopg2
   - micromamba install -c conda-forge cartopy
