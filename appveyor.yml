@@ -56,7 +56,7 @@ build_script:
   - micromamba install -c conda-forge cartopy
   - micromamba install -c conda-forge ipython
   - micromamba install -c conda-forge cfgrib
-  - micromamba install -c conda-forge dotenv
+  - micromamba install -c conda-forge python-dotenv
   - micromamba install -c conda-forge gdal
   - micromamba install -c conda-forge cdsapi
   - micromamba install -c conda-forge pydap
