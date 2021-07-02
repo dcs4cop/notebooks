@@ -59,11 +59,13 @@ build_script:
   - micromamba install -c conda-forge python-dotenv
   - micromamba install -c conda-forge cdsapi
   - micromamba install -c conda-forge pydap
+  - micromamba install -c conda-forge graphviz
+  - micromamba install -c conda-forge python-graphviz
 
   - list_of_failing_nbs=()
 #  - directories_with_nbs="*/examples/notebooks xcube/examples/notebooks/datastores \
 #                          xcube/examples/notebooks/* */notebooks"
-  - directories_with_nbs="*/notebooks"
+  - directories_with_nbs="*/examples/notebooks"
   - initial_wd=$(pwd)
   - for dir_with_nbs in $directories_with_nbs;
         do
