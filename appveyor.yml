@@ -61,8 +61,9 @@ build_script:
   - micromamba install -c conda-forge pydap
 
   - list_of_failing_nbs=()
-  - directories_with_nbs="*/examples/notebooks xcube/examples/notebooks/datastores \
-                          xcube/examples/notebooks/* */notebooks"
+#  - directories_with_nbs="*/examples/notebooks xcube/examples/notebooks/datastores \
+#                          xcube/examples/notebooks/* */notebooks"
+  - directories_with_nbs="*/notebooks"
   - initial_wd=$(pwd)
   - for dir_with_nbs in $directories_with_nbs;
         do
