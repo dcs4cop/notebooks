@@ -37,6 +37,7 @@ build_script:
   - git submodule update --init --recursive
   - git submodule update --recursive --remote
   - cd xcube
+  - git checkout alicja-fix-nbs
   - micromamba create -y -f environment.yml -c conda-forge
   - micromamba activate xcube
   - python setup.py develop
