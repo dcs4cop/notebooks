@@ -37,7 +37,6 @@ build_script:
   - git submodule update --init --recursive
   - git submodule update --recursive --remote
   - cd xcube
-  - git checkout alicja-fix-nbs
   - micromamba create -y -f environment.yml -c conda-forge
   - micromamba activate xcube
   - python setup.py develop
@@ -67,7 +66,7 @@ build_script:
   - list_of_failing_nbs=()
 #  - directories_with_nbs="*/examples/notebooks xcube/examples/notebooks/datastores \
 #                          xcube/examples/notebooks/* */notebooks"
-  - directories_with_nbs="xcube/examples/notebooks"
+  - directories_with_nbs="*/notebooks"
   - initial_wd=$(pwd)
   - for dir_with_nbs in $directories_with_nbs;
         do
