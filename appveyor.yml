@@ -64,9 +64,8 @@ build_script:
   - micromamba install -c conda-forge dask=2021.03.1 dask-core=2021.03.1 distributed=2021.03.1
 
   - list_of_failing_nbs=()
-#  - directories_with_nbs="*/examples/notebooks xcube/examples/notebooks/datastores \
-#                          xcube/examples/notebooks/* */notebooks"
-  - directories_with_nbs="*/notebooks"
+  - directories_with_nbs="*/examples/notebooks xcube/examples/notebooks/datastores \
+                          xcube/examples/notebooks/* */notebooks"
   - initial_wd=$(pwd)
   - for dir_with_nbs in $directories_with_nbs;
         do
