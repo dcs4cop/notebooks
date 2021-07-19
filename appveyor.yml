@@ -69,7 +69,7 @@ build_script:
   - for dir_with_nbs in $directories_with_nbs;
         do
           if [[ -d $dir_with_nbs ]]; then
-            if ! [[ $string == *"inputdata"* ]]; then
+            if ! [[ $dir_with_nbs == *"inputdata"* ]]; then
               for nb in ${dir_with_nbs}/*.ipynb;
                 do
                   jupyter nbconvert --to python  --ExecutePreprocessor.kernel_name=python3 $nb;
