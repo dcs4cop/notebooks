@@ -69,17 +69,19 @@ build_script:
   - for dir_with_nbs in $directories_with_nbs;
         do
           if [[ -d $dir_with_nbs ]]; then
-            for nb in ${dir_with_nbs}/*.ipynb;
-              do
-                jupyter nbconvert --to python  --ExecutePreprocessor.kernel_name=python3 $nb;
-                export VAR=$nb;
-                directory=$(dirname "${VAR}");
-                filename=$(basename -- "$nb");
-                filename="${filename%.*}";
-                file="${filename}.py";
-                echo "Testing ${file} in directory ${directory}";
-                cd "$directory" && ipython "$file" || list_of_failing_nbs+=( "$nb" ) && cd "$initial_wd" && continue;
-              done
+            if ! [[ $string == *"inputdata"* ]]; then
+              for nb in ${dir_with_nbs}/*.ipynb;
+                do
+                  jupyter nbconvert --to python  --ExecutePreprocessor.kernel_name=python3 $nb;
+                  export VAR=$nb;
+                  directory=$(dirname "${VAR}");
+                  filename=$(basename -- "$nb");
+                  filename="${filename%.*}";
+                  file="${filename}.py";
+                  echo "Testing ${file} in directory ${directory}";
+                  cd "$directory" && ipython "$file" || list_of_failing_nbs+=( "$nb" ) && cd "$initial_wd" && continue;
+                done
+            fi
           fi
         done
   - if [[ ${#list_of_failing_nbs[@]} -eq 0 ]]; then
