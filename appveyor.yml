@@ -61,6 +61,7 @@ build_script:
   - micromamba install -c conda-forge pydap
   - micromamba install -c conda-forge graphviz
   - micromamba install -c conda-forge python-graphviz
+  - micromamba install -c conda-forge ipyleaflet
 
   - list_of_failing_nbs=()
   - directories_with_nbs="*/examples/notebooks xcube/examples/notebooks/datastores \
